@@ -1,10 +1,16 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC ##This notebook is to load the data from Databricks Lakehouse Bronze layer to Silver layer
+
+# COMMAND ----------
+
 # MAGIC %sql
 # MAGIC use catalog hive_metastore
 
 # COMMAND ----------
 
-#dbutils.widgets.text("Schema", "tsel_dev")
+# MAGIC %md
+# MAGIC ##Define parameter
 
 # COMMAND ----------
 
@@ -15,7 +21,11 @@ tgt_table_name= f"{Schema_Name}.SILVER_WISDOM"
 
 # COMMAND ----------
 
-# DBTITLE 1,Read Delta Table
+# MAGIC %md
+# MAGIC ##Read Delta Table
+
+# COMMAND ----------
+
 #Read bronze delta table as source
 upcc_read=(spark.readStream
   .format("delta")
@@ -27,7 +37,11 @@ upcc_read.createOrReplaceTempView("v_wisdom_read")
 
 # COMMAND ----------
 
-# DBTITLE 1,Trasformation Logic
+# MAGIC %md
+# MAGIC ##Trasformation Logic
+
+# COMMAND ----------
+
 
 wisdom_transform=spark.sql("""select
   TRX_DATE,
@@ -40,7 +54,11 @@ from
 
 # COMMAND ----------
 
-# DBTITLE 1,Write to Sink
+# MAGIC %md
+# MAGIC ##Write to Sink using Delta Streaming
+
+# COMMAND ----------
+
 
 (wisdom_transform.writeStream 
   .format("delta") 

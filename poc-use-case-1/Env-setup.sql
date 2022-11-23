@@ -18,6 +18,6 @@ drop schema ${Name} CASCADE
 
 -- MAGIC %py
 -- MAGIC Name=dbutils.widgets.get("Name")
--- MAGIC path=f"dbfs:/FileStore/telkomsel/checkpt/{Name}_db"
+-- MAGIC path=f"dbfs:/FileStore/telkomsel/checkpt/{Name}"
 -- MAGIC print(path)
 -- MAGIC dbutils.fs.rm(path,True)

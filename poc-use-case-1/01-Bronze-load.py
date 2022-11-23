@@ -1,6 +1,16 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC ## This notebook is to load the data from S3 bucket to Databricks Lakehouse Bronze layer 
+
+# COMMAND ----------
+
 # MAGIC %sql
 # MAGIC use catalog hive_metastore
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ##Define parameter
 
 # COMMAND ----------
 
@@ -17,6 +27,12 @@ print(Full_table_path)
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ##Load Data to Bronze tables using Autoloader
+
+# COMMAND ----------
+
+# DBTITLE 1,Load Data to Bronze tables using Autoloader
 from  pyspark.sql.functions import input_file_name
 df = (spark.readStream.format("cloudFiles")
       .option("cloudFiles.format", "parquet")
