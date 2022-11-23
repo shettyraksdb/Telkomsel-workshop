@@ -9,6 +9,12 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("file", 'wisdom') #ifrs_tc_chg
+dbutils.widgets.text("Schema", 'Your Name')
+dbutils.widgets.text("Table", 'BRONZE_WISDOM')  #bronze_tc_chg
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ##Define parameter
 
